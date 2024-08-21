@@ -36,16 +36,59 @@ void printList(){
     } 
   }
 }
+void deletNode(int data){
+  if(head == NULL){
+    printf("The list is empty\n");
+    return;
+  }else{
+    struct Node* previous = head;
+    struct Node* current = head-> link;
 
+    if(current == NULL){
+      if(previous-> data == data){
+        free(current);
+        head = NULL;
+        printf("Node is deleted");
+        return;
+      }else{
+        printf("Node with %d is not found", data);
+        return;
+      }
+    }else{
+      if(previous -> data == data){
+          head = current;
+          free(previous);
+          printf("Node is deleted");
+          return;
+      }else{
+        while (current != NULL)
+        {
+          if(current -> data == data){
+            previous -> link = current -> link;
+            free(current);
+            printf("Node deleted");
+            return;
+          }
+          previous = current;
+          current = current -> link;
+        }
+        printf("Node %d is not found", data);
+        return;
+        
+      }
+    }   
+  }
+}
 
 int main(){
   void printList();
   void insertAtEnd(int);
+  void deletNode(int);
   char option;
   int data;
 
   while (option != 'q'){
-    printf("Q for quite \t I for insert \nS for show List \t\nEnter the option: ");
+    printf("Q for quite \t I for insert \nS for show List \t D for delete \nEnter the option: ");
     scanf("%c", &option);
     switch (option){
       case 'S': printList();
@@ -55,6 +98,12 @@ int main(){
           scanf("%d", &data);
           insertAtEnd(data);
           printf("Data inserted at the end successfully!!\n");
+      break;
+      case 'D':
+          printf("Enter the node: ");
+          scanf("%d", &data);
+          deletNode(data);
+          printf("\n");
       break;
       default:printf("Enter a valid option");
       break;
