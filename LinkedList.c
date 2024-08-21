@@ -6,7 +6,18 @@ struct  Node{
   struct Node* link;
 };
 struct Node* head = NULL;
-
+void insertAtStart(int data){
+  if(head == NULL){
+    head = (struct Node*)malloc(sizeof(struct Node));
+    head -> data = data;
+    head -> link = NULL;
+  }else{
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode -> data = data;
+    newNode -> link = head;
+    head = newNode;
+  }
+}
 void insertAtEnd(int data){
   if(head == NULL){
     head = (struct Node*) malloc(sizeof(struct Node));
@@ -37,6 +48,7 @@ void printList(){
   }
 }
 void deletNode(int data){
+
   if(head == NULL){
     printf("The list is empty\n");
     return;
@@ -82,13 +94,14 @@ void deletNode(int data){
 
 int main(){
   void printList();
+  void insertAtStart(int);
   void insertAtEnd(int);
   void deletNode(int);
   char option;
   int data;
 
   while (option != 'q'){
-    printf("Q for quite \t I for insert \nS for show List \t D for delete \nEnter the option: ");
+    printf("Q for quite \tI for insert \nS for show List \t D for delete \nH for insert at the head \nEnter the option: ");
     scanf("%c", &option);
     switch (option){
       case 'S': printList();
@@ -104,6 +117,12 @@ int main(){
           scanf("%d", &data);
           deletNode(data);
           printf("\n");
+      break;
+      case 'H':
+          printf("Enter the number: ");
+          scanf("%d", &data);
+          insertAtStart(data);
+          printf("Data inserted at the start!!\n");
       break;
       default:printf("Enter a valid option");
       break;
