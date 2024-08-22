@@ -124,6 +124,13 @@ void recursivePrint(struct Node* root){
   printf("item: %d\n", root->data);
   recursivePrint(root -> link);
 }
+void recursiveReversePrint(struct Node* root){
+  if(root == NULL){
+    return;
+  }
+  recursiveReversePrint(root -> link);
+  printf("Item: %d\n", root -> data);
+}
 int main(){
   void printList();
   void insertAtStart(int);
@@ -131,13 +138,14 @@ int main(){
   void deletNode(int);
   void reverList();
   void recursivePrint(struct Node*);
+  void recursiveReversePrint(struct Node*);
   char option;
   int data;
 
   
 
   while (option != 'q'){
-    printf("Q for quite \t\t\tI for insert \nS for show List \t\tD for delete \nH for insert at the head \tR for reverse the list\nP for recursive print\nEnter the option: ");
+    printf("Q for quite \t\t\tI for insert \nS for show List \t\tD for delete \nH for insert at the head \tR for reverse the list\nP for recursive print \t\tO for recursive reverse print\nEnter the option: ");
     scanf("%c", &option);
     switch (option){
       case 'S': printList();
@@ -162,6 +170,9 @@ int main(){
       break;
       case 'P':
           recursivePrint(head);
+      break;
+      case 'O':
+          recursiveReversePrint(head);
       break;
       default:printf("Enter a valid option");
       break;
