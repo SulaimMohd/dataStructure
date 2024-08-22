@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int main(){
-  printf("Hello world");
+  char msg[10] = "helloworld";
+  puts(msg);
   return 0;
 }

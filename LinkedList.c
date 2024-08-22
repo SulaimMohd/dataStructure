@@ -6,6 +6,12 @@ struct  Node{
   struct Node* link;
 };
 struct Node* head = NULL;
+int getData(char msg[]){
+  int data;
+  puts(msg);
+  scanf("%d", &data);
+  return data;
+}
 void insertAtStart(int data){
   if(head == NULL){
     head = (struct Node*)malloc(sizeof(struct Node));
@@ -111,42 +117,51 @@ void reverList(){
   head = current;
   printf("The list reversed!!\n");
 }
-
+void recursivePrint(struct Node* root){
+  if(root == NULL){
+    return;
+  }
+  printf("item: %d\n", root->data);
+  recursivePrint(root -> link);
+}
 int main(){
   void printList();
   void insertAtStart(int);
   void insertAtEnd(int);
   void deletNode(int);
   void reverList();
+  void recursivePrint(struct Node*);
   char option;
   int data;
 
+  
+
   while (option != 'q'){
-    printf("Q for quite \t\t\tI for insert \nS for show List \t\tD for delete \nH for insert at the head \tR for reverse the list\nEnter the option: ");
+    printf("Q for quite \t\t\tI for insert \nS for show List \t\tD for delete \nH for insert at the head \tR for reverse the list\nP for recursive print\nEnter the option: ");
     scanf("%c", &option);
     switch (option){
       case 'S': printList();
       break;
       case 'I':
-          printf("Enter the Number: ");
-          scanf("%d", &data);
+          data = getData("Enter the number: ");
           insertAtEnd(data);
           printf("Data inserted at the end successfully!!\n");
       break;
       case 'D':
-          printf("Enter the node: ");
-          scanf("%d", &data);
+          data = getData("Enter the number: ");
           deletNode(data);
           printf("\n");
       break;
       case 'H':
-          printf("Enter the number: ");
-          scanf("%d", &data);
+          data = getData("Enter the number: ");
           insertAtStart(data);
           printf("Data inserted at the start!!\n");
       break;
       case 'R':
           reverList();
+      break;
+      case 'P':
+          recursivePrint(head);
       break;
       default:printf("Enter a valid option");
       break;
